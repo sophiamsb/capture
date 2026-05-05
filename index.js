@@ -150,8 +150,9 @@ function nextPath(label, ext) {
 
 async function loadPage(page) {
   console.log(`  → Loading ${targetUrl}`);
-  await page.goto(targetUrl, { waitUntil: 'networkidle', timeout: 30000 });
-  await page.waitForTimeout(1500);
+  await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 })
+    .catch(() => {}); // some sites never reach networkidle — that's fine
+  await page.waitForTimeout(2000);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(400);
 }
@@ -233,7 +234,7 @@ async function runTour(page) {
 
   for (const link of links) {
     try {
-      await page.goto(link, { waitUntil: 'networkidle', timeout: 15000 });
+      await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
       await page.waitForTimeout(1200);
       const slug = link.replace(new URL(targetUrl).origin, '').replace(/\//g, '-').replace(/^-/, '').slice(0, 30) || 'page';
       await shot(page, `page_${slug}`);
@@ -281,7 +282,8 @@ async function runFlow(page) {
 
   console.log(`  → Running flow with ${steps.length} steps…`);
 
-  await page.goto(targetUrl, { waitUntil: 'networkidle', timeout: 30000 });
+  await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 })
+    .catch(() => {});
   await page.waitForTimeout(1000);
 
   for (const step of steps) {
@@ -289,7 +291,7 @@ async function runFlow(page) {
       case 'goto':
         console.log(`  → goto ${step.url}`);
         await page.goto(step.url.startsWith('http') ? step.url : new URL(step.url, targetUrl).href,
-          { waitUntil: 'networkidle', timeout: 20000 });
+          { waitUntil: 'domcontentloaded', timeout: 20000 }).catch(() => {});
         await page.waitForTimeout(step.wait || 1000);
         break;
       case 'scroll':
@@ -384,7 +386,8 @@ async function runReel(page) {
 
   console.log(`  → Running reel with ${steps.length} steps @ ${FPS}fps…`);
 
-  await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 })
+    .catch(() => {});
   await page.waitForTimeout(1500);
 
   for (const step of steps) {
@@ -392,7 +395,7 @@ async function runReel(page) {
       case 'goto': {
         const dest = step.url.startsWith('http') ? step.url : new URL(step.url, targetUrl).href;
         console.log(`  → goto ${dest}`);
-        await page.goto(dest, { waitUntil: 'domcontentloaded', timeout: 20000 });
+        await page.goto(dest, { waitUntil: 'domcontentloaded', timeout: 20000 }).catch(() => {});
         await page.waitForTimeout(step.wait || 1500);
         break;
       }
