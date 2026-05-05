@@ -67,11 +67,12 @@ if (flag('--help', '-h') || argv.length === 0) {
     --flow <file>      Path to flow config JSON (flow / reel mode)
 
   VIEWPORT
-    --device desktop   1440×900  (default)
-    --device laptop    1280×800
-    --device tablet    768×1024
-    --device mobile    390×844
-    --device WxH       Custom, e.g. 1920x1080
+    --device large-desktop  1920×1080
+    --device desktop        1440×900  (default)
+    --device laptop         1280×800
+    --device tablet         768×1024
+    --device mobile         390×844
+    --device WxH            Custom, e.g. 2560x1440
 
   OUTPUT
     --out <dir>        Output directory  (default: ./captures)
@@ -116,10 +117,11 @@ const reelSizeArg = opt('--reel-size', null, '1080x1920');
 const [reelW, reelH] = reelSizeArg.split(/[x×]/i).map(Number);
 
 const DEVICES = {
-  desktop: { width: 1440, height: 900 },
-  laptop:  { width: 1280, height: 800 },
-  tablet:  { width: 768,  height: 1024 },
-  mobile:  { width: 390,  height: 844 },
+  'large-desktop': { width: 1920, height: 1080 },
+  desktop:         { width: 1440, height: 900 },
+  laptop:          { width: 1280, height: 800 },
+  tablet:          { width: 768,  height: 1024 },
+  mobile:          { width: 390,  height: 844 },
 };
 
 function resolveViewport(arg) {

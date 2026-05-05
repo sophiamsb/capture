@@ -11,7 +11,12 @@
     "start": "node server.js",
     "setup": "npx playwright install chromium"
   },
-  "keywords": ["screenshot", "portfolio", "playwright", "website"],
+  "keywords": [
+    "screenshot",
+    "portfolio",
+    "playwright",
+    "website"
+  ],
   "author": "sophia",
   "license": "MIT",
   "dependencies": {
