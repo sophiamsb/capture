@@ -1,0 +1,33 @@
+[
+  { "type": "hold",         "ms": 1400 },
+
+  { "type": "smoothScroll", "y": 299,   "duration": 1000 },
+  { "type": "hold",         "ms": 700 },
+
+  { "type": "smoothScroll", "y": 1098,  "duration": 1200 },
+  { "type": "hold",         "ms": 900 },
+
+  { "type": "smoothScroll", "y": 2300,  "duration": 1600 },
+  { "type": "hold",         "ms": 800 },
+
+  { "type": "smoothScroll", "y": 3000,  "duration": 1000 },
+  { "type": "hold",         "ms": 600 },
+
+  { "type": "smoothScroll", "y": 3600,  "duration": 1200 },
+  { "type": "hold",         "ms": 800 },
+
+  { "type": "smoothScroll", "y": 5000,  "duration": 1600 },
+  { "type": "hold",         "ms": 600 },
+
+  { "type": "smoothScroll", "y": 7500,  "duration": 1800 },
+  { "type": "hold",         "ms": 500 },
+
+  { "type": "smoothScroll", "y": 10000, "duration": 1800 },
+  { "type": "hold",         "ms": 400 },
+
+  { "type": "smoothScroll", "y": 0,     "duration": 1400 },
+  { "type": "hold",         "ms": 800 },
+
+  { "type": "click",        "selector": "#menu-btn", "wait": 800 },
+  { "type": "hold",         "ms": 1200 }
+]

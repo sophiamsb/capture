@@ -1,0 +1,20 @@
+{
+  "name": "capture",
+  "version": "2.0.0",
+  "description": "Screenshot and video capture tool for any website — scroll tours, recordings, element capture, guided flows",
+  "main": "index.js",
+  "bin": {
+    "capture": "./index.js",
+    "screenshot-tour": "./screenshot-tour.js"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "setup": "npx playwright install chromium"
+  },
+  "keywords": ["screenshot", "portfolio", "playwright", "website"],
+  "author": "sophia",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.59.1"
+  }
+}

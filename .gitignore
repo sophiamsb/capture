@@ -1,0 +1,9 @@
+node_modules/
+public/captures/
+captures/
+frames_*/
+*.png
+*.jpg
+*.jpeg
+*.webm
+*.mp4

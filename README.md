@@ -1,59 +1,60 @@
-# screenshot-tour
+# capture
 
-Generate a varied set of website screenshots at a custom resolution — great for portfolio mockups.
+Generate screenshots and videos of any website — scroll tours, single frames, element capture, and guided reels.
 
-Captures scroll positions, hover states, and internal page links automatically.
+Runs a headless Chromium browser locally. Requires Node.js and a one-time browser download.
 
 ## Requirements
 
 - [Node.js](https://nodejs.org/) v18+
+- ffmpeg (only needed for `--mode reel`) — install with `brew install ffmpeg`
 
 ## Setup
 
 ```bash
 npm install
-npm run setup   # downloads Chromium
+npm run setup   # downloads Chromium (~170MB, one time)
 ```
 
-## Usage
+## Start the app
 
 ```bash
-node screenshot-tour.js <url> [WIDTHxHEIGHT] [output-dir]
+npm start
 ```
 
-**Examples:**
+Open [http://localhost:3000](http://localhost:3000), paste a URL, pick a mode and device, hit Capture.
+
+## CLI usage
 
 ```bash
-# defaults to 1600x800, saves to ./screenshots
-node screenshot-tour.js https://example.com
-
-# custom size
-node screenshot-tour.js https://example.com 1440x900
-
-# custom size + custom output folder
-node screenshot-tour.js https://example.com 1600x800 ./my-shots
+node index.js <url> [options]
 ```
 
-## Output
+| Option | Default | Description |
+|---|---|---|
+| `--mode` | `tour` | `tour`, `screenshot`, `video`, `flow`, `reel` |
+| `--device` | `desktop` | `desktop`, `laptop`, `tablet`, `mobile`, or `1920x1080` |
+| `--full` | — | Full-page screenshot (screenshot mode) |
+| `--selector` | — | Capture a specific CSS element |
+| `--flow` | — | Path to a flow JSON file (flow / reel mode) |
+| `--out` | `./captures` | Output directory |
+| `--fps` | `30` | Frame rate (reel mode) |
+| `--reel-size` | `1080x1920` | Output video dimensions (reel mode) |
 
-Each run produces up to ~12 PNGs named like:
+```bash
+# scroll tour
+node index.js https://example.com
 
+# single full-page screenshot on mobile
+node index.js https://example.com --mode screenshot --full --device mobile
+
+# guided reel → mp4
+node index.js https://example.com --mode reel --flow my-flow.json
 ```
-example_com_2025-05-04_01_top.png
-example_com_2025-05-04_02_full.png
-example_com_2025-05-04_03_scroll_25pct.png
-...
-```
 
-| Screenshot | What it captures |
-|---|---|
-| `01_top` | Above the fold |
-| `02_full` | Full-page tall screenshot |
-| `03–05_scroll_*` | 25%, 50%, 75% scroll positions |
-| `06_bottom` | Bottom of the page |
-| `07_hover_link` | Hovering over the first link |
-| `08_hover_cta` | Hovering over a button or CTA |
-| `09+` | Up to 4 internal subpages |
+## Why it can't run fully online
+
+The tool controls a real browser (Chromium) to load pages, scroll, click, and capture. That browser runs on your machine — it can't run on a static host like Netlify or Vercel. To host it remotely you'd need a server with Node.js and Chromium installed (a VPS, Railway, Render, etc.).
 
 ## License
 

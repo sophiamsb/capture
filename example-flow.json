@@ -1,0 +1,10 @@
+[
+  { "type": "screenshot", "label": "landing" },
+  { "type": "scroll", "pct": 0.4, "wait": 700 },
+  { "type": "screenshot", "label": "mid_page" },
+  { "type": "hover", "selector": "a[href]", "wait": 400 },
+  { "type": "screenshot", "label": "hover_link" },
+  { "type": "scroll", "pct": 1, "wait": 500 },
+  { "type": "screenshot", "label": "bottom", "fullPage": false },
+  { "type": "screenshot", "label": "full", "fullPage": true }
+]
